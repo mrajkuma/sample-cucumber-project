@@ -1,0 +1,337 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.Enmin</groupId>
+    <artifactId>sample-cucumber-project</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <packaging>jar</packaging>
+    <build>
+        <finalName>executable-example</finalName>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-assembly-plugin</artifactId>
+                <version>3.3.0</version>
+                <executions>
+                    <execution>
+                        <id>package-jar-with-dependencies</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>single</goal>
+                        </goals>
+                        <configuration>
+                            <appendAssemblyId>false</appendAssemblyId>
+                            <descriptorRefs>
+                                <descriptorRef>jar-with-dependencies</descriptorRef>
+                            </descriptorRefs>
+                            <archive>
+                                <manifest>
+                                    <mainClass>com.Enmin.Start</mainClass>
+                                </manifest>
+                            </archive>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+    <properties>
+        <maven.compiler.source>21</maven.compiler.source>
+        <maven.compiler.target>21</maven.compiler.target>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>io.cucumber</groupId>
+            <artifactId>cucumber-java</artifactId>
+            <version>6.10.4</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/io.cucumber/cucumber-junit -->
+        <dependency>
+            <groupId>io.cucumber</groupId>
+            <artifactId>cucumber-junit</artifactId>
+            <version>6.10.4</version>
+<!--            <scope>test</scope>-->
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/org.seleniumhq.selenium/selenium-java -->
+        <dependency>
+            <groupId>org.seleniumhq.selenium</groupId>
+            <artifactId>selenium-java</artifactId>
+            <version>3.141.59</version>
+        </dependency>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.13.2</version>
+            <!--          <scope>test</scope>-->
+        </dependency>
+    </dependencies>
+
+<!--    <profiles>-->
+<!--        <profile>-->
+<!--            <id>TestRunner</id>-->
+
+<!--            <build>-->
+<!--                <finalName>${project.artifactId}-${project.version}</finalName>-->
+
+<!--                <resources>-->
+<!--                    <resource>-->
+<!--                        <directory>src</directory>-->
+<!--                        <excludes>-->
+<!--                            <exclude>**/*.java</exclude>-->
+<!--                        </excludes>-->
+<!--                    </resource>-->
+<!--                </resources>-->
+<!--                <testResources>-->
+<!--                    <testResource>-->
+<!--                        <directory>src</directory>-->
+<!--                        <excludes>-->
+<!--                            <exclude>**/*.java</exclude>-->
+<!--                        </excludes>-->
+<!--                    </testResource>-->
+<!--                </testResources>-->
+
+<!--                <plugins>-->
+
+<!--                    <plugin>-->
+<!--                        <groupId>org.apache.maven.plugins</groupId>-->
+<!--                        <artifactId>maven-surefire-plugin</artifactId>-->
+<!--                        <version>2.22.2</version>-->
+<!--                        <configuration>-->
+<!--                            <parallel>methods</parallel>-->
+<!--                            <forkMode>perthread</forkMode>-->
+<!--                            <perCoreThreadCount>false</perCoreThreadCount>-->
+<!--                            <threadCount>4</threadCount>-->
+<!--                            &lt;!&ndash;                            <useUnlimitedThreads>true</useUnlimitedThreads>&ndash;&gt;-->
+<!--                            &lt;!&ndash;                            <testFailureIgnore>true</testFailureIgnore>&ndash;&gt;-->
+<!--                            <runOrder>Alphabetical</runOrder>-->
+<!--                            <testFailureIgnore>true</testFailureIgnore>-->
+
+<!--                            <includes>-->
+<!--                                <include>**/*TestRunner.java</include>-->
+<!--                                <include>**/*FailedTestRunner.java</include>-->
+<!--                            </includes>-->
+<!--                        </configuration>-->
+<!--                    </plugin>-->
+
+<!--                    <plugin>-->
+<!--                        <groupId>org.apache.maven.plugins</groupId>-->
+<!--                        <artifactId>maven-compiler-plugin</artifactId>-->
+<!--                        <version>3.8.1</version>-->
+<!--                        <configuration>-->
+<!--                            <source>21</source>-->
+<!--                            <target>21</target>-->
+<!--                            <annotationProcessorPaths>-->
+<!--                                <path>-->
+<!--                                    <groupId>org.projectlombok</groupId>-->
+<!--                                    <artifactId>lombok</artifactId>-->
+<!--                                    <version>1.18.24</version>-->
+<!--                                </path>-->
+<!--                            </annotationProcessorPaths>-->
+<!--                        </configuration>-->
+<!--                    </plugin>-->
+
+<!--                    <plugin>-->
+<!--                        <groupId>org.codehaus.mojo</groupId>-->
+<!--                        <artifactId>exec-maven-plugin</artifactId>-->
+<!--                        <version>3.3.0</version>-->
+<!--                        <executions>-->
+<!--                            <execution>-->
+<!--                                <id>my-execution</id>-->
+<!--                                <phase>test</phase>-->
+<!--                                <goals>-->
+<!--                                    <goal>java</goal>-->
+<!--                                </goals>-->
+<!--                            </execution>-->
+<!--                        </executions>-->
+<!--                        <configuration>-->
+<!--                            <mainClass>com.Enmin.runners.TestRunner</mainClass>-->
+<!--                            <classpathScope>test</classpathScope>-->
+<!--                        </configuration>-->
+<!--                    </plugin>-->
+
+<!--                    <plugin>-->
+<!--                        <artifactId>maven-site-plugin</artifactId>-->
+<!--                        <version>3.12.0</version>-->
+<!--                        <executions>          <execution>-->
+<!--                            <id>attach-descriptor</id>-->
+<!--                            <goals>-->
+<!--                                <goal>attach-descriptor</goal>-->
+<!--                            </goals>-->
+<!--                        </execution>       </executions>-->
+<!--                    </plugin>-->
+<!--                    <plugin>-->
+<!--                        <groupId>org.apache.maven.plugins</groupId>-->
+<!--                        <artifactId>maven-project-info-reports-plugin</artifactId>-->
+<!--                        <version>3.4.1</version>-->
+<!--                    </plugin>-->
+
+<!--                    <plugin>-->
+<!--                        <groupId>net.masterthought</groupId>-->
+<!--                        <artifactId>maven-cucumber-reporting</artifactId>-->
+<!--                        <version>5.8.1</version>-->
+<!--                        <executions>-->
+<!--                            <execution>-->
+<!--                                <id>execution</id>-->
+<!--                                <phase>verify</phase>-->
+<!--                                <goals>-->
+<!--                                    <goal>generate</goal>-->
+<!--                                </goals>-->
+<!--                                <configuration>-->
+<!--                                    <projectName>Cucumber HTML Reports</projectName>-->
+<!--                                    <outputDirectory>cucumber-report-html</outputDirectory>-->
+<!--                                    <inputDirectory>.</inputDirectory>-->
+<!--                                    <jsonFiles>-->
+<!--                                        <param>cucumber.json</param>-->
+<!--                                    </jsonFiles>-->
+<!--                                </configuration>-->
+<!--                            </execution>-->
+<!--                        </executions>-->
+<!--                    </plugin>-->
+<!--                </plugins>-->
+<!--            </build>-->
+<!--        </profile>-->
+
+<!--        <profile>-->
+<!--            <id>Jar Creation</id>-->
+<!--            <activation>-->
+<!--                <activeByDefault>true</activeByDefault>-->
+<!--            </activation>-->
+<!--            <build>-->
+<!--                <finalName>${project.artifactId}-${project.version}</finalName>-->
+
+<!--                <resources>-->
+<!--                    <resource>-->
+<!--                        <directory>src</directory>-->
+
+<!--                    </resource>-->
+<!--                    <resource>-->
+<!--                        <directory>/</directory>-->
+<!--                        <includes>-->
+<!--                            <include>data.properties</include>-->
+<!--                        </includes>-->
+<!--                    </resource>-->
+
+<!--                </resources>-->
+<!--                <testResources>-->
+<!--                    <testResource>-->
+<!--                        <directory>src</directory>-->
+
+<!--                    </testResource>-->
+<!--                </testResources>-->
+<!--                <plugins>-->
+<!--                    <plugin>-->
+<!--                        <groupId>org.apache.maven.plugins</groupId>-->
+<!--                        <artifactId>maven-surefire-plugin</artifactId>-->
+<!--                        <version>2.22.2</version>-->
+<!--                        <executions>-->
+<!--                            <execution>-->
+<!--                                <phase>package</phase>-->
+<!--                                &lt;!&ndash;                                <goals>&ndash;&gt;-->
+<!--                                &lt;!&ndash;                                    <goal>verify</goal>&ndash;&gt;-->
+<!--                                &lt;!&ndash;                                </goals>&ndash;&gt;-->
+<!--                                <configuration>-->
+<!--                                    <transformers>-->
+<!--                                        <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">-->
+<!--                                            <mainClass>com.Enmin.Start</mainClass>-->
+<!--                                        </transformer>-->
+<!--                                    </transformers>-->
+<!--                                </configuration>-->
+<!--                            </execution>-->
+<!--                        </executions>-->
+<!--                    </plugin>-->
+<!--                    <plugin>-->
+<!--                        <groupId>org.apache.maven.plugins</groupId>-->
+<!--                        <artifactId>maven-compiler-plugin</artifactId>-->
+<!--                        <version>3.8.0</version>-->
+<!--                        <executions>-->
+<!--                            <execution>-->
+<!--                                <phase>test-compile</phase>-->
+<!--                            </execution></executions>-->
+<!--                        <configuration>-->
+<!--                            <source>21</source>-->
+<!--                            <target>21</target>-->
+<!--                        </configuration>-->
+<!--                    </plugin>-->
+
+<!--                    <plugin>-->
+<!--                        <groupId>org.apache.maven.plugins</groupId>-->
+<!--                        <artifactId>maven-jar-plugin</artifactId>-->
+<!--                        <executions> <execution>-->
+<!--                            <phase>package</phase>-->
+<!--                        </execution></executions>-->
+<!--                        <version>3.0.2</version>-->
+<!--                        <configuration>-->
+<!--                            <archive>-->
+<!--                                <manifest>-->
+<!--                                    <mainClass>com.Enmin.Start</mainClass>-->
+<!--                                </manifest>-->
+
+<!--                            </archive>-->
+<!--                        </configuration>-->
+<!--                    </plugin>-->
+
+<!--                    <plugin>-->
+<!--                        <groupId>org.apache.maven.plugins</groupId>-->
+<!--                        <artifactId>maven-assembly-plugin</artifactId>-->
+<!--                        <version>3.3.0</version>-->
+<!--                        <executions>-->
+<!--                            <execution>-->
+<!--                                <id>package-jar-with-dependencies</id>-->
+<!--                                <phase>package</phase>-->
+<!--                                <goals>-->
+<!--                                    <goal>single</goal>-->
+<!--                                </goals>-->
+<!--                                <configuration>-->
+<!--                                    <appendAssemblyId>false</appendAssemblyId>-->
+<!--                                    <descriptorRefs>-->
+<!--                                        <descriptorRef>jar-with-dependencies</descriptorRef>-->
+<!--                                    </descriptorRefs>-->
+<!--                                    <archive>-->
+<!--                                        <manifest>-->
+<!--                                            <mainClass>com.Enmin.Start</mainClass>-->
+<!--                                        </manifest>-->
+<!--                                    </archive>-->
+
+<!--                                </configuration>-->
+
+<!--                            </execution>-->
+<!--                        </executions>-->
+<!--                    </plugin>-->
+
+<!--                                        <plugin>-->
+<!--                                            <groupId>net.masterthought</groupId>-->
+<!--                                            <artifactId>maven-cucumber-reporting</artifactId>-->
+<!--                                            <version>5.8.1</version>-->
+<!--                                            <executions>-->
+<!--                                                <execution>-->
+<!--                                                    <id>execution</id>-->
+<!--                                                    <phase>verify</phase>-->
+<!--                                                    <goals>-->
+<!--                                                        <goal>generate</goal>-->
+<!--                                                    </goals>-->
+<!--                                                    <configuration>-->
+<!--                                                        <projectName>Cucumber HTML Reports</projectName>-->
+<!--                                                        <outputDirectory>target/cucumber-report-html</outputDirectory>-->
+<!--                                                        <inputDirectory>target</inputDirectory>-->
+<!--                                                        <jsonFiles>-->
+<!--                                                            <param>target/cucumber.json</param>-->
+<!--                                                        </jsonFiles>-->
+<!--                                                    </configuration>-->
+<!--                                                </execution>-->
+<!--                                            </executions>-->
+
+<!--                                        </plugin>-->
+
+<!--                </plugins>-->
+
+<!--            </build>-->
+<!--        </profile>-->
+<!--    </profiles>-->
+
+</project>
